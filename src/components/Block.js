@@ -17,7 +17,7 @@ const Block = ({data}) => {
     );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     number: {
       fontSize: '10px',
       color: colors.blue,

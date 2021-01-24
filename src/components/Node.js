@@ -15,7 +15,6 @@ import Block from "./Block";
 
 const Node = ({ node, expanded, toggleNodeExpanded }) => {
   const classes = useStyles();
-  console.log('nodes', node)
   return (
     <ExpansionPanel
       elevation={3}
@@ -48,9 +47,15 @@ const Node = ({ node, expanded, toggleNodeExpanded }) => {
         </Box>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <Box>
+        <Box className={classes.blocksSections}>
           {
-            node.blocks && node.blocks.map((block) => {
+            ( node.loadingBlocks && !node.errorBlocks ) && <Typography> Loading...</Typography>
+          }
+          {
+            ( !node.loadingBlocks && node.errorBlocks ) && <Typography> Sorry there was an error</Typography>
+          }
+          {
+            ( !node.loadingBlocks && !node.errorBlocks && node.blocks ) && node.blocks.map((block) => {
               return <Block key={block.id} data={block}/>
             })
           }
@@ -104,6 +109,9 @@ const useStyles = makeStyles((theme) => ({
     color: colors.faded,
     lineHeight: 2,
   },
+  blocksSections: {
+    width: '100%',
+  }
 }));
 
 Node.propTypes = {

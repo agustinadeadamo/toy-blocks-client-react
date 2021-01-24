@@ -46,7 +46,6 @@ export function getBlocksData(node) {
 
       dispatch(getBlocksDataSuccess(node, blocksList));
     } catch (err) {
-        console.log(err, 'ERR')
       dispatch(getBlocksDataFailure(node));
     }
   };
